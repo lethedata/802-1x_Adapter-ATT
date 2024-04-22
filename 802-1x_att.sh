@@ -6,7 +6,7 @@
 ## Stage 0: Set Variables
 ###
 export OPENSSL_CONF=/opt/att/openssl.cnf
-WPA_CONF=
+WPA_CONF_PATH=
 PORT_ISP=
 PORT_1=
 PORT_2=
@@ -16,7 +16,7 @@ BRIDGE_NAME=br0
 # Stage 1: Enable 802.1x Redirection on WAN Port
 ###
 /usr/bin/ebtables -t nat -A PREROUTING -i $PORT_ISP -p 0x888e --log-level 6 -j redirect
-/usr/bin/ebtables -t nat -A POSTROUTING -o $PORT_ISP -p 0x888e --log-level 6 -j snat --to-src `awk --field-separator '["#]' '/identity=/ { print $2}' "$WPA_CONF/wpa_supplicant.conf"`
+/usr/bin/ebtables -t nat -A POSTROUTING -o $PORT_ISP -p 0x888e --log-level 6 -j snat --to-src `awk --field-separator '["#]' '/identity=/ { print $2}' "$WPA_CONF_PATH/wpa_supplicant.conf"`
 
 ###
 # Stage 2: Configure Bridge and enable WAN port
@@ -33,7 +33,7 @@ BRIDGE_NAME=br0
 ###
 # Stage 3: 802.1x Authentication
 ###
-wpa_supplicant -B -Dwired -i $BRIDGE_NAME -c "$WPA_CONF/wpa_supplicant.conf" -P/var/run/wpa_supplicant.pid
+wpa_supplicant -B -Dwired -i $BRIDGE_NAME -c "$WPA_CONF_PATH/wpa_supplicant.conf" -P/var/run/wpa_supplicant.pid
 sleep 10
 wpa_cli logon
 sleep 3
