@@ -1,4 +1,4 @@
-# AT&T 802.1x Bridge Adapter
+# 802.1x Bridge Adapter (ATT)
 
 This script creates a 3 port Linux bridge allowing 802.1x authentication to be offloaded from one device (ie router) to a separate device (the bridge).
 
