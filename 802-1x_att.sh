@@ -26,7 +26,6 @@ ip link set $BRIDGE_NAME multicast off
 ip link set $PORT_ISP master $BRIDGE_NAME
 ip link set $PORT_1 master $BRIDGE_NAME
 ip link set $PORT_2 master $BRIDGE_NAME
-ip link set master $BRIDGE_NAME
 ip link set $PORT_ISP up
 ip link set $BRIDGE_NAME up
 
